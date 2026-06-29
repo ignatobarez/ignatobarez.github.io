@@ -3,20 +3,20 @@
 const canciones = [
 
 {
-    titulo:"Canción 1",
-    artista:"Artista 1",
+    titulo:"Quedate carca",
+    artista:"Chustym",
     archivo:"music/cancion1.mp3"
 },
 
 {
-    titulo:"Canción 2",
-    artista:"Artista 2",
+    titulo:"Conmigo",
+    artista:"Chustym X InÇo",
     archivo:"music/cancion2.mp3"
 },
 
 {
-    titulo:"Canción 3",
-    artista:"Artista 3",
+    titulo:"Fria pero mia",
+    artista:"Chustym",
     archivo:"music/cancion3.mp3"
 },
 
