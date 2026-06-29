@@ -1,33 +1,36 @@
 // ====== LISTA DE CANCIONES ======
-
+const cover = document.getElementById("cover");
 const canciones = [
 
 {
     titulo:"Canción 1",
     artista:"Artista 1",
-    archivo:"music/cancion1.mp3"
+    archivo:"music/cancion1.mp3",
+    portada:"img/album1.jpg"
 },
 
 {
     titulo:"Canción 2",
     artista:"Artista 2",
-    archivo:"music/cancion2.mp3"
+    archivo:"music/cancion2.mp3",
+    portada:"img/album2.jpg"
 },
 
 {
     titulo:"Canción 3",
     artista:"Artista 3",
-    archivo:"music/cancion3.mp3"
+    archivo:"music/cancion3.mp3",
+    portada:"img/album3.jpg"
 },
 
 {
     titulo:"Canción 4",
     artista:"Artista 4",
-    archivo:"music/cancion4.mp3"
+    archivo:"music/cancion4.mp3",
+    portada:"img/album4.jpg"
 }
 
 ];
-
 // ====== ELEMENTOS ======
 
 const audio = document.getElementById("audio");
@@ -68,19 +71,21 @@ function cargarLista(listaCanciones){
 
         div.className="cancion";
 
-        div.innerHTML=`
+        div.innerHTML = `
 
-        <div class="infoCancion">
+<img src="${cancion.portada}" class="mini">
 
-            <h3>${cancion.titulo}</h3>
+<div class="infoCancion">
 
-            <p>${cancion.artista}</p>
+<h3>${cancion.titulo}</h3>
 
-        </div>
+<p>${cancion.artista}</p>
 
-        <div class="playIcon">▶</div>
+</div>
 
-        `;
+<div class="playIcon">▶</div>
+
+`;
 
         div.onclick=()=>{
 
@@ -104,11 +109,13 @@ function cargarLista(listaCanciones){
 
 function cargarCancion(){
 
-    audio.src=canciones[indice].archivo;
+    audio.src = canciones[indice].archivo;
 
-    titulo.innerHTML=canciones[indice].titulo;
+    titulo.innerHTML = canciones[indice].titulo;
 
-    artista.innerHTML=canciones[indice].artista;
+    artista.innerHTML = canciones[indice].artista;
+
+    cover.src = canciones[indice].portada;
 
 }
 
