@@ -2,26 +2,26 @@
 
 const canciones = [
     {
-        titulo: "Canción 1",
-        artista: "Artista 1",
+        titulo: "Pegado a tu piel",
+        artista: "Chustym",
         archivo: "music/cancion1.mp3",
         portada: "img/album1.jpg"
     },
     {
-        titulo: "Canción 2",
-        artista: "Artista 2",
+        titulo: "Conmigo",
+        artista: "Chustym X Inço",
         archivo: "music/cancion2.mp3",
         portada: "img/album2.jpg"
     },
     {
-        titulo: "Canción 3",
-        artista: "Artista 3",
+        titulo: "Fria pero mia",
+        artista: "Chustym",
         archivo: "music/cancion3.mp3",
         portada: "img/album3.jpg"
     },
     {
-        titulo: "Canción 4",
-        artista: "Artista 4",
+        titulo: "Pròximamente",
+        artista: "xxxxx X xxxx",
         archivo: "music/cancion4.mp3",
         portada: "img/album4.jpg"
     }
