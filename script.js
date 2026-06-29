@@ -1,69 +1,59 @@
-// ====== LISTA DE CANCIONES ======
-const cover = document.getElementById("cover");
+
+
 const canciones = [
-
-{
-    titulo:"Canción 1",
-    artista:"Artista 1",
-    archivo:"music/cancion1.mp3",
-    portada:"img/album1.jpg"
-},
-
-{
-    titulo:"Canción 2",
-    artista:"Artista 2",
-    archivo:"music/cancion2.mp3",
-    portada:"img/album2.jpg"
-},
-
-{
-    titulo:"Canción 3",
-    artista:"Artista 3",
-    archivo:"music/cancion3.mp3",
-    portada:"img/album3.jpg"
-},
-
-{
-    titulo:"Canción 4",
-    artista:"Artista 4",
-    archivo:"music/cancion4.mp3",
-    portada:"img/album4.jpg"
-}
-
+    {
+        titulo: "Canción 1",
+        artista: "Artista 1",
+        archivo: "music/cancion1.mp3",
+        portada: "img/album1.jpg"
+    },
+    {
+        titulo: "Canción 2",
+        artista: "Artista 2",
+        archivo: "music/cancion2.mp3",
+        portada: "img/album2.jpg"
+    },
+    {
+        titulo: "Canción 3",
+        artista: "Artista 3",
+        archivo: "music/cancion3.mp3",
+        portada: "img/album3.jpg"
+    },
+    {
+        titulo: "Canción 4",
+        artista: "Artista 4",
+        archivo: "music/cancion4.mp3",
+        portada: "img/album4.jpg"
+    }
 ];
-// ====== ELEMENTOS ======
 
 const audio = document.getElementById("audio");
-
 const lista = document.getElementById("listaCanciones");
-
 const play = document.getElementById("play");
-
 const anterior = document.getElementById("anterior");
-
 const siguiente = document.getElementById("siguiente");
-
 const barra = document.getElementById("barra");
-
 const volumen = document.getElementById("volumen");
-
 const buscar = document.getElementById("buscar");
 
 const titulo = document.getElementById("titulo");
-
 const artista = document.getElementById("artista");
+const cover = document.getElementById("cover");
 
 const actual = document.getElementById("actual");
-
 const duracion = document.getElementById("duracion");
+
+const equalizer = document.getElementById("equalizer");
 
 let indice = 0;
 
-// ====== CREAR LISTA ======
+// ============================
+// LISTA
+// ============================
 
 function cargarLista(listaCanciones){
 
-    lista.innerHTML="";
+    lista.innerHTML = "";
 
     listaCanciones.forEach(cancion=>{
 
@@ -74,25 +64,21 @@ function cargarLista(listaCanciones){
         div.className = "cancion";
 
         if(indiceOriginal === indice){
-
             div.classList.add("activa");
-
         }
 
         div.innerHTML = `
-
-            <img src="${cancion.portada}" class="mini">
+            <img
+                src="${cancion.portada}"
+                class="mini ${indiceOriginal===indice?'reproduciendo':''}"
+            >
 
             <div class="infoCancion">
-
                 <h3>${cancion.titulo}</h3>
-
                 <p>${cancion.artista}</p>
-
             </div>
 
             <div class="playIcon">▶</div>
-
         `;
 
         div.onclick = ()=>{
@@ -107,7 +93,7 @@ function cargarLista(listaCanciones){
 
             play.innerHTML = "⏸";
 
-        }
+        };
 
         lista.appendChild(div);
 
@@ -115,27 +101,33 @@ function cargarLista(listaCanciones){
 
 }
 
-// ====== CARGAR CANCIÓN ======
+// ============================
+// CARGAR CANCIÓN
+// ============================
 
 function cargarCancion(){
 
     audio.src = canciones[indice].archivo;
 
-    titulo.innerHTML = canciones[indice].titulo;
+    titulo.textContent = canciones[indice].titulo;
 
-    artista.innerHTML = canciones[indice].artista;
+    artista.textContent = canciones[indice].artista;
 
     cover.src = canciones[indice].portada;
 
 }
 
+// ============================
+
 cargarLista(canciones);
 
 cargarCancion();
 
-// ====== PLAY ======
+// ============================
+// PLAY
+// ============================
 
-play.onclick=function(){
+play.onclick = ()=>{
 
     if(audio.paused){
 
@@ -151,11 +143,13 @@ play.onclick=function(){
 
     }
 
-}
+};
 
-// ====== SIGUIENTE ======
+// ============================
+// SIGUIENTE
+// ============================
 
-siguiente.onclick=function(){cargarLista(canciones);
+function siguienteCancion(){
 
     indice++;
 
@@ -167,15 +161,19 @@ siguiente.onclick=function(){cargarLista(canciones);
 
     cargarCancion();
 
+    cargarLista(canciones);
+
     audio.play();
 
     play.innerHTML="⏸";
 
 }
 
-// ====== ANTERIOR ======
+// ============================
+// ANTERIOR
+// ============================
 
-anterior.onclick=function(){cargarLista(canciones);
+function anteriorCancion(){
 
     indice--;
 
@@ -187,17 +185,25 @@ anterior.onclick=function(){cargarLista(canciones);
 
     cargarCancion();
 
+    cargarLista(canciones);
+
     audio.play();
 
     play.innerHTML="⏸";
 
 }
 
-// ====== BARRA ======
+siguiente.onclick = siguienteCancion;
+
+anterior.onclick = anteriorCancion;
+
+// ============================
+// BARRA
+// ============================
 
 audio.addEventListener("loadedmetadata",()=>{
 
-    barra.max=audio.duration;
+    barra.max = audio.duration;
 
     mostrarDuracion();
 
@@ -205,81 +211,110 @@ audio.addEventListener("loadedmetadata",()=>{
 
 audio.addEventListener("timeupdate",()=>{
 
-    barra.value=audio.currentTime;
+    barra.value = audio.currentTime;
 
     mostrarActual();
 
 });
 
-barra.oninput=function(){
+barra.oninput = ()=>{
 
-    audio.currentTime=barra.value;
+    audio.currentTime = barra.value;
 
-}
+};
 
-// ====== VOLUMEN ======
+// ============================
+// VOLUMEN
+// ============================
 
-volumen.oninput=function(){
+volumen.oninput = ()=>{
 
-    audio.volume=volumen.value;
+    audio.volume = volumen.value;
 
-}
+};
 
-// ====== SIGUIENTE AUTOMÁTICO ======
+// ============================
+// ECUALIZADOR
+// ============================
 
-audio.onended=function(){
+audio.addEventListener("play",()=>{
 
-    siguiente.click();
+    play.innerHTML="⏸";
 
-}
+    if(equalizer){
 
-// ====== TIEMPOS ======
-
-function mostrarActual(){
-
-    let min=Math.floor(audio.currentTime/60);
-
-    let seg=Math.floor(audio.currentTime%60);
-
-    if(seg<10){
-
-        seg="0"+seg;
+        equalizer.classList.add("activo");
 
     }
 
-    actual.innerHTML=min+":"+seg;
+});
+
+audio.addEventListener("pause",()=>{
+
+    play.innerHTML="▶";
+
+    if(equalizer){
+
+        equalizer.classList.remove("activo");
+
+    }
+
+});
+
+audio.addEventListener("ended",()=>{
+
+    if(equalizer){
+
+        equalizer.classList.remove("activo");
+
+    }
+
+    siguienteCancion();
+
+});
+
+// ============================
+// TIEMPOS
+// ============================
+
+function mostrarActual(){
+
+    let min = Math.floor(audio.currentTime/60);
+
+    let seg = Math.floor(audio.currentTime%60);
+
+    if(seg<10) seg="0"+seg;
+
+    actual.textContent = `${min}:${seg}`;
 
 }
 
 function mostrarDuracion(){
 
-    let min=Math.floor(audio.duration/60);
+    let min = Math.floor(audio.duration/60);
 
-    let seg=Math.floor(audio.duration%60);
+    let seg = Math.floor(audio.duration%60);
 
-    if(seg<10){
+    if(seg<10) seg="0"+seg;
 
-        seg="0"+seg;
-
-    }
-
-    duracion.innerHTML=min+":"+seg;
+    duracion.textContent = `${min}:${seg}`;
 
 }
 
-// ====== BUSCADOR ======
+// ============================
+// BUSCADOR
+// ============================
 
 buscar.addEventListener("keyup",()=>{
 
-    const texto=buscar.value.toLowerCase();
+    const texto = buscar.value.toLowerCase();
 
-    const resultado=canciones.filter(c=>
+    const resultado = canciones.filter(c=>{
 
-        c.titulo.toLowerCase().includes(texto) ||
+        return c.titulo.toLowerCase().includes(texto) ||
+               c.artista.toLowerCase().includes(texto);
 
-        c.artista.toLowerCase().includes(texto)
-
-    );
+    });
 
     cargarLista(resultado);
 
