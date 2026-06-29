@@ -65,37 +65,47 @@ function cargarLista(listaCanciones){
 
     lista.innerHTML="";
 
-    listaCanciones.forEach((cancion,i)=>{
+    listaCanciones.forEach(cancion=>{
 
-        const div=document.createElement("div");
+        const indiceOriginal = canciones.indexOf(cancion);
 
-        div.className="cancion";
+        const div = document.createElement("div");
+
+        div.className = "cancion";
+
+        if(indiceOriginal === indice){
+
+            div.classList.add("activa");
+
+        }
 
         div.innerHTML = `
 
-<img src="${cancion.portada}" class="mini">
+            <img src="${cancion.portada}" class="mini">
 
-<div class="infoCancion">
+            <div class="infoCancion">
 
-<h3>${cancion.titulo}</h3>
+                <h3>${cancion.titulo}</h3>
 
-<p>${cancion.artista}</p>
+                <p>${cancion.artista}</p>
 
-</div>
+            </div>
 
-<div class="playIcon">▶</div>
+            <div class="playIcon">▶</div>
 
-`;
+        `;
 
-        div.onclick=()=>{
+        div.onclick = ()=>{
 
-            indice=i;
+            indice = indiceOriginal;
 
             cargarCancion();
 
+            cargarLista(canciones);
+
             audio.play();
 
-            play.innerHTML="⏸";
+            play.innerHTML = "⏸";
 
         }
 
@@ -145,7 +155,7 @@ play.onclick=function(){
 
 // ====== SIGUIENTE ======
 
-siguiente.onclick=function(){
+siguiente.onclick=function(){cargarLista(canciones);
 
     indice++;
 
@@ -165,7 +175,7 @@ siguiente.onclick=function(){
 
 // ====== ANTERIOR ======
 
-anterior.onclick=function(){
+anterior.onclick=function(){cargarLista(canciones);
 
     indice--;
 

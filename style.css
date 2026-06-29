@@ -391,3 +391,24 @@ border-radius:6px;
 object-fit:cover;
 
 }
+.cancion.activa{
+
+    background:#1DB954;
+
+    color:white;
+
+}
+
+.cancion.activa p{
+
+    color:white;
+
+}
+
+.cancion.activa .playIcon{
+
+    opacity:1;
+
+    color:white;
+
+}
